@@ -6,6 +6,8 @@ const envSchema = z.object({
   POKEMON_API_BASE_URL: z.string(),
   CLIENT_BASE_URL: z.url(),
   BETTER_AUTH_SECRET: z.string(),
+  RESEND_API_KEY: z.string(),
+  EMAIL_FROM: z.email(),
   DOMAIN: z.string().default('localhost')
 });
 
@@ -21,5 +23,7 @@ export const {
   POKEMON_API_BASE_URL,
   CLIENT_BASE_URL,
   BETTER_AUTH_SECRET,
+  RESEND_API_KEY,
+  EMAIL_FROM,
   DOMAIN
 } = data;

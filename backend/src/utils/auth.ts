@@ -1,7 +1,16 @@
 import { betterAuth } from 'better-auth';
 import { MongoClient } from 'mongodb';
 import { mongodbAdapter } from 'better-auth/adapters/mongodb';
-import { MONGO_URI, DB_NAME, CLIENT_BASE_URL, BETTER_AUTH_SECRET, DOMAIN } from '#config';
+import {
+  MONGO_URI,
+  DB_NAME,
+  CLIENT_BASE_URL,
+  BETTER_AUTH_SECRET,
+  DOMAIN,
+  EMAIL_FROM
+} from '#config';
+import { verifyEmail } from '#templates';
+import { resend } from '#services';
 
 const client = new MongoClient(MONGO_URI);
 const db = client.db(DB_NAME);
@@ -11,6 +20,20 @@ export const auth = betterAuth({
   secret: BETTER_AUTH_SECRET,
   emailAndPassword: {
     enabled: true
+  },
+  emailVerification: {
+    sendOnSignUp: true,
+    async sendVerificationEmail({ user, token }) {
+      resend.emails.send({
+        from: `Pokémon Battel <${EMAIL_FROM}>`,
+        to: user.email,
+        subject: 'Please confirm your email address',
+        html: verifyEmail({
+          name: user.name,
+          url: `${CLIENT_BASE_URL}/verify-email?token=${token}`
+        })
+      });
+    }
   },
   baseURL: CLIENT_BASE_URL,
   session: {
