@@ -23,9 +23,17 @@
       "development": "./src/middlewares/index.ts",
       "default": "./dist/middlewares/index.js"
     },
+    "#models": {
+      "development": "./src/models/index.ts",
+      "default": "./dist/models/index.js"
+    },
     "#routes": {
       "development": "./src/routes/index.ts",
       "default": "./dist/routes/index.js"
+    },
+    "#schemas": {
+      "development": "./src/schemas/index.ts",
+      "default": "./dist/schemas/index.js"
     },
     "#types": {
       "development": "./src/types/index.ts",

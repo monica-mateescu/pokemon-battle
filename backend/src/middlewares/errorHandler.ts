@@ -2,7 +2,7 @@ import type { ErrorRequestHandler } from 'express';
 
 type ErrorPayload = {
   message: string;
-  code?: number;
+  code?: string;
 };
 
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {

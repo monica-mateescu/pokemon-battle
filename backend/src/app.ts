@@ -4,7 +4,7 @@ import cors from 'cors';
 import { CLIENT_BASE_URL } from '#config';
 import { toNodeHandler } from 'better-auth/node';
 import { auth } from '#utils';
-import { authRouter } from '#routes';
+import { authRouter, leaderboardRouter } from '#routes';
 import { errorHandler, notFoundHandler } from '#middlewares';
 
 const app = express();
@@ -18,6 +18,8 @@ app.all('/api/auth/*splat', toNodeHandler(auth));
 app.use('/api', authRouter);
 
 app.use(express.json());
+
+app.use('/api/leaderboard', leaderboardRouter);
 
 app.use('/*splat', notFoundHandler);
 
