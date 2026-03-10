@@ -6,4 +6,6 @@ const authRouter = Router();
 
 authRouter.get('/me', authMiddleware, me);
 
+
+
 export default authRouter;
